@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_issue_book" model="ir.ui.view">
+			<field name="name">view.book.details</field>
+			<field name="model">issue.book</field>
+			<field name="arch" type="xml">
+				<form string="Issue Book">
+					<sheet>
+						<group>
+							<group>
+								<field name="issue_id"/>
+								<field name="stud_id"/>
+								<field name="issue_book_title"/>
+								<field name="issue_date"/>
+								<field name="return_date"/>
+								<field name="fine"/>
+								<field name="status"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="tree_issue_book" model="ir.ui.view">
+			<field name="name">tree.issue_book</field>
+			<field name="model">issue.book</field>
+			<field name="arch" type="xml">
+				<tree string="Issue Book">
+					<field name="stud_id"/>
+					<field name="issue_book_title"/>
+					<field name="issue_date"/>
+					<field name="return_date"/>
+					<field name="fine"/>
+					<field name="status"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_issue_book" model="ir.actions.act_window">
+			<field name="name">Library</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">issue.book</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+
+		<!-- <menuitem id="menu_book" name="Library" sequence="1"/ -->
+		<menuitem id="menu_issue_book_view" name="Issue/Return Books" sequence="2" action="action_issue_book" parent="menu_book_menu"/>
+	</data>
+</odoo>

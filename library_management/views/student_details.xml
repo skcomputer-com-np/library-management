@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_student" model="ir.ui.view">
+			<field name="name">view.student</field>
+			<field name="model">student.details</field>
+			<field name="arch" type="xml">
+				<form string="Registration">
+					<sheet>
+						<group>
+							<group>
+								<field name="stud_id"/>
+								<field name="stud_name"/>
+								<field name="gender"/>
+								<field name="divisoin"/>
+								<field name="email"/>
+							</group>
+							<group>
+								<field name="address"/>
+								<field name="city"/>
+								<field name="pin_code"/>
+								<field name="mobile_no"/>
+								<field name="date"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="tree_student" model="ir.ui.view">
+			<field name="name">tree.student</field>
+			<field name="model">student.details</field>
+			<field name="arch" type="xml">
+				<tree string="Student Details">
+					<field name="stud_name"/>
+					<field name="gender"/>
+					<field name="divisoin"/>
+					<field name="city"/>
+					<field name="mobile_no"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_student" model="ir.actions.act_window">
+			<field name="name">Student Details</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">student.details</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem id="menuitem_student_view" name="Student" sequence="3" action="action_student" parent="menu_book_menu"/>
+	</data>
+</odoo>
