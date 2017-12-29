@@ -3,31 +3,42 @@
 from odoo import api, fields, models
 
 class StudentDetails(models.Model):
-	_name = "student.details"
-	_description = "Student Details"
+	_inherit = 'res.partner'
 
-	stud_id = fields.Char(string='Student Id: ',required=True)
-	stud_name = fields.Char(string='Student Name: ',required=True)
+	is_status = fields.Selection(
+		[
+			('stud','Student'),
+			('faculty','Faculty'),
+			('admin','Admin'),
+		],
+
+		default='stud'
+
+		)
+
 	gender = fields.Selection(
 		[
 			('male','Male'),
 			('female','Female'),
-
+			('other','Other')
 		])
-
-	mobile_no = fields.Char('Mobile No: ')
-	address = fields.Text('Address: ')
-	city = fields.Char('City: ')
-	pin_code = fields.Integer('Pin Code: ')
-	email = fields.Char('Email Id: ')
 	divisoin = fields.Selection(
 		[
 			('1','A'),
 			('2','B'),
 			('0','Other')
 		])
-	date = fields.Date("Date: ")
+	date = fields.Date("Date")
 
+	@api.onchange('is_status')
+	def onchange_standard(self):
+		if self.is_status  == 'stud' :
+			 self.function  = 'Student'
 
+		elif self.is_status == 'faculty':
+			 self.function 	= 	'Faculty'
+
+		elif self.is_status == 'admin':
+			 self.function 	= 	'Admin'
 
 	# ./odoo-bin -d asd --db-filter=asd --addons-path=addons,../library-management -u library_management

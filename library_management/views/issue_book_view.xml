@@ -9,13 +9,10 @@
 					<sheet>
 						<group>
 							<group>
-								<field name="issue_id"/>
 								<field name="stud_id"/>
-								<field name="issue_book_title"/>
+								<field name="name"/>
 								<field name="issue_date"/>
-								<field name="return_date"/>
-								<field name="fine"/>
-								<field name="status"/>
+								<field name="due_date"/>
 							</group>
 						</group>
 					</sheet>
@@ -29,11 +26,9 @@
 			<field name="arch" type="xml">
 				<tree string="Issue Book">
 					<field name="stud_id"/>
-					<field name="issue_book_title"/>
+					<field name="name"/>
 					<field name="issue_date"/>
-					<field name="return_date"/>
-					<field name="fine"/>
-					<field name="status"/>
+					<field name="due_date"/>
 				</tree>
 			</field>
 		</record>
@@ -47,7 +42,6 @@
 		</record>
 
 
-		<!-- <menuitem id="menu_book" name="Library" sequence="1"/ -->
-		<menuitem id="menu_issue_book_view" name="Issue/Return Books" sequence="2" action="action_issue_book" parent="menu_book_menu"/>
+		<menuitem id="menu_issue_book_view" name="Issue Books" sequence="4" action="action_issue_book" parent="menu_book"/>
 	</data>
 </odoo>

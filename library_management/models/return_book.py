@@ -9,7 +9,7 @@ class ReturnBook(models.Model):
 	_name = "return.book"
 	_description = "Return Book Details"
 
-	stud_name 		= fields.Many2one('res.partner',string='Student Name', domain=[('is_status', '=', "stud")])
+	stud_name 		= fields.Many2one('res.partner', domain=[('is_status', '=', "stud")])
 	name 			= fields.Many2one('product.template',domain=[('book_type', '=', "Book")])
 	issue_date 		= fields.Char(string='Issue Date')
 	due_date 		= fields.Char(string='Due Date')
