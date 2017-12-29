@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_publisher" model="ir.ui.view">
+			<field name="name">view.publisher</field>
+			<field name="model">publisher.details</field>
+			<field name="arch" type="xml">
+				<form string="Publsher">
+					<sheet>
+						<group>
+							<group>
+								<field name="name"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="tree_category" model="ir.ui.view">
+			<field name="name">tree.category</field>
+			<field name="model">publisher.details</field>
+			<field name="arch" type="xml">
+				<tree string="Publsher Details">
+					<field name="name"/>					
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_publisher" model="ir.actions.act_window">
+			<field name="name">Publisher Details</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">publisher.details</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem id="menu_add_publisher_menu" name="Add Publisher" sequence="10" parent="menu_book"/>
+		<menuitem id="menuitem_publisher_view" name="Publisher" sequence="11" action="action_publisher" parent="menu_add_publisher_menu"/>
+	</data>
+</odoo>

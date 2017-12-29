@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_return_book" model="ir.ui.view">
+			<field name="name">view.return.details</field>
+			<field name="model">return.book</field>
+			<field name="arch" type="xml">
+				<form string="Return Book">
+					<sheet>
+						<group>
+							<group>
+								<field name="stud_name"/>
+								<field name="name"/>
+								<field name="issue_date"/>
+								<field name="due_date"/>
+								<field name="return_date"/>
+								<field name="status"/>
+								<field name="fine" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="tree_return_book" model="ir.ui.view">
+			<field name="name">tree.return_book</field>
+			<field name="model">return.book</field>
+			<field name="arch" type="xml">
+				<tree string="Return Book">
+					<field name="stud_name"/>
+					<field name="name"/>
+					<field name="issue_date"/>
+					<field name="due_date"/>
+					<field name="return_date"/>
+					<field name="status"/>
+					<field name="fine" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_return_book" model="ir.actions.act_window">
+			<field name="name">Library</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">return.book</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+
+		<menuitem id="menu_return_book_view" name="Return Books" sequence="5" action="action_return_book" parent="menu_book"/>
+	</data>
+</odoo>
