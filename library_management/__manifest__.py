@@ -22,6 +22,9 @@ This is description for library management system.
         'wizard/make_price.xml',
         'wizard/make_student_divison.xml',
         'wizard/student_wizard_report.xml',
+        'report/report_menu_item.xml',
+        'report/student_report.xml',
+        'report/student_wizard_report_view.xml',
     ],
     'demo': [
     ],

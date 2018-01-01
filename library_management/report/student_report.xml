@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_studentdetail">
+    <t t-call="web.external_layout">
+        <!-- <t t-set="doc" t-value="doc.with_context({})" />  -->
+        <div class="page">
+            <div class="oe_structure"/>
+            <div class="row">
+                <table width="100%">
+                    <tr>
+                        <td class="text-center"><b> Student Details</b></td>
+                    </tr>
+                </table>
+                <table width="100%">
+                    <tr>
+                        <td class="text-center">Name</td>
+                        <td class="text-center">Division</td>
+                        <td class="text-center">Gender</td>
+                        <td class="text-center">Date</td>
+                    </tr>
+                    <t t-foreach="docs" t-as="doc1">
+                        <tr>
+                            <td class="text-center"><t t-esc="doc1.name"/></td>
+                            <td class="text-center"><t t-esc="doc1.divisoin"/></td>
+                            <td class="text-center"><t t-esc="doc1.gender"/></td>
+                            <td class="text-center"><t t-esc="doc1.date"/></td>
+                        </tr>
+                    </t>
+                </table>
+
+            </div>
+        </div>
+    </t>
+    </template>
+
+  <!--   <template id="report_studentdetail">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="library_management.report_studentdetail_document"/>
+            </t>
+        </t>
+    </template> -->
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report 
+            id="action_report_student_detail"
+            string="Student Detail"
+            model="res.partner"
+            report_type="qweb-html"
+            file="library_management.report_studentdetail"
+            name="library_management.report_studentdetail"
+        />
+
+
+        <report
+            id="wizard_action_report_student_detail"
+            string="Student Details with wizard"
+            model="res.partner"
+            report_type="qweb-pdf"
+            file="library_management.wizard_report_studentdetail"
+            name="library_management.wizard_report_studentdetail"
+            menu="False"
+        />
+    </data>
+</odoo>
