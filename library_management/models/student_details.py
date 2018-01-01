@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-
-from odoo import api, fields, models
+import re
+from odoo import api, fields, models,_
+from odoo.exceptions import UserError,ValidationError
 
 class StudentDetails(models.Model):
 	_inherit = 'res.partner'
@@ -40,5 +41,19 @@ class StudentDetails(models.Model):
 
 		elif self.is_status == 'admin':
 			 self.function 	= 	'Admin'
+
+	@api.constrains('mobile')
+	def check_phone_no(self):
+		if not (self.mobile.isdigit() and len(self.mobile)==10):
+			raise ValidationError(_('Mobile number must be 10 digits numeric!!!'))
+
+		# if re.match("[0-9]{10}",self.mobile)==None:
+		# 	raise ValidationError(_('Mobile number must be 10 digits numeric!!!'))
+		
+	@api.constrains('email')
+	def check_email(self):
+		EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
+		if not EMAIL_REGEX.match(self.email):
+			raise ValidationError(_('Email id invalid..!'))
 
 	# ./odoo-bin -d asd --db-filter=asd --addons-path=addons,../library-management -u library_management

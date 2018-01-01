@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_make_student_form" model="ir.ui.view">
+            <field name="name">make.student.form</field>
+            <field name="model">make.student</field>
+            <field name="arch" type="xml">
+                <form string="Student" version="7.0">
+                    <h2>Are you sure want to change?</h2>
+                    <group>
+                        <field name="age"/>
+                    </group>
+                    <footer>
+                        <span groups="base.group_user">
+                            <button string="Yes" type="object"
+                                    name="state_student" class="oe_highlight"
+                                    context="{'my_filed': 'simple msg'}"/>
+                            or
+                            <button special="cancel" string="No" type="object"/>
+                        </span>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="action_set_student_view" multi="True"
+                    name="Student" res_model="make.student" src_model="res.partner"
+                    view_mode="form" target="new" view_type="form"/>
+    </data>
+</odoo>

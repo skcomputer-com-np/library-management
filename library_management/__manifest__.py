@@ -8,7 +8,7 @@ This is description for library management system.
     """,
 
     'depends': [
-        'sale',
+        'sale','web',
     ],
 
     'data': [
@@ -19,6 +19,9 @@ This is description for library management system.
         'views/category_view.xml',
         'views/publisher_view.xml',
         'views/author_view.xml',
+        'wizard/make_price.xml',
+        'wizard/make_student_divison.xml',
+        'wizard/student_wizard_report.xml',
     ],
     'demo': [
     ],

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_make_price_form" model="ir.ui.view">
+            <field name="name">make.price.form</field>
+            <field name="model">make.price</field>
+            <field name="arch" type="xml">
+                <form string="Price Change" version="7.0">
+                    <h2>Are you sure want to change?</h2>
+                    <group>
+                        <field name="book_price"/>
+                    </group>
+                    <footer>
+                        <span groups="base.group_user">
+                            <button string="Yes" type="object"
+                                    name="change_price" class="oe_highlight"/>
+                                or
+                            <button special="cancel" string="No" type="object"/>
+                        </span>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="action_set_book_price_view" multi="True"
+                    name="Change Book Price" res_model="make.price" src_model="product.template"
+                    view_mode="form" target="new" view_type="form"/>
+    </data>
+</odoo>
+
+<!-- context="{'my_filed': 'simple msg'} -->
