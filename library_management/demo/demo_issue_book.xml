@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Issue book -->
+        <record id="demo_issue_book_id1" model="issue.book">
+            <field name="stud_id" ref="library_management.demo_student_details_id1"/>
+            <field name="name" ref="library_management.demo_book_details_id1"/>
+            <field name="isbn">001</field>
+            <field name="issue_date">01/02/2018</field>
+            <field name="due_date">01/17/2018</field>
+        </record>
+    </data>
+</odoo>

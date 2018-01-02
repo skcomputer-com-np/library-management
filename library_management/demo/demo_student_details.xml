@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- student Details -->
+        <record id="demo_student_details_id1" model="res.partner">
+            <field name="is_status">stud</field>
+            <field name="name">sushil</field>
+            <field name="mobile">1234567890</field>
+            <field name="email">sushil@gmail.com</field>
+            <field name="divisoin">1</field>
+        </record>
+
+        <function id="test_phone" model="res.partner" name="check_phone_no" eval="[[ref('demo_student_details_id1')]]"/>
+
+        <function id="test_email" model="res.partner" name="check_email" eval="[[ref('demo_student_details_id1')]]"/>
+ 
+    </data>
+</odoo>

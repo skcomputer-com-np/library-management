@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Book Details note for M@M(6,0)-->
+        <record id="demo_book_details_id1" model="product.template">
+            <field name="role_librarian" eval="True"></field>
+            <field name="name">python</field>
+            <field name="book_type"  eval="[(6,0,[ref('demo_material_id1')])]"/> 
+            <field name="isbn">001</field>
+        </record>
+    </data>
+</odoo>

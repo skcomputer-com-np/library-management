@@ -15,14 +15,14 @@
 
 				<xpath expr="//field[@name='name']" position="after">
 					<div>
-							<label for='book_type' string="Book Type:"/>
-							<field name="book_type" widget='many2many_tags' attrs="{'invisible':[('role_librarian', '=' ,False)]}"/>
+						<label for='book_type' string="Book Type:"/>
+						<field name="book_type" widget='many2many_tags' attrs="{'invisible':[('role_librarian', '=' ,False)]}"/>
 					</div>
 						
 				</xpath>
 
 				<xpath expr="//field[@name='type']" position="after">
-					<field name="isbn" attrs="{'invisible':[('role_librarian', '=' ,False)]}"/>
+					<field name="isbn" attrs="{'invisible':[('role_librarian', '=' ,False)]}" required='1'/>
 					<field name="author" attrs="{'invisible':[('role_librarian', '=' ,False)]}"/>
 					<field name="publisher" attrs="{'invisible':[('role_librarian', '=' ,False)]}"/>
 				</xpath>

@@ -12,6 +12,7 @@ This is description for library management system.
     ],
 
     'data': [
+        'security/account_security.xml',
         'views/book_details_view.xml',
         'views/issue_book_view.xml',
         'views/return_book_view.xml',
@@ -25,11 +26,17 @@ This is description for library management system.
         'report/report_menu_item.xml',
         'report/student_report.xml',
         'report/student_wizard_report_view.xml',
-        'security/account_security.xml',
         'security/ir.model.access.csv',
-        
     ],
     'demo': [
+        'demo/demo_category_details.xml',
+        'demo/demo_publisher_details.xml',
+        'demo/demo_auther_details.xml',
+        'demo/demo_student_details.xml',
+        'demo/demo_materials.xml',
+        'demo/demo_book_details.xml',
+        'demo/demo_issue_book.xml',
+        'demo/demo_return_book.xml',
     ],
     'qweb': [
     ],

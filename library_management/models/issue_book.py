@@ -11,7 +11,7 @@ class IssueBook(models.Model):
 	name = fields.Many2one('product.template', 'Book Name',domain=[('role_librarian', '=', True)])
 	isbn = fields.Char('ISBN')
 	issue_date = fields.Date(string='Issued Date',default=datetime.datetime.now())
-	due_date = fields.Date(string='Return Date')
+	due_date = fields.Date(string='Due Date')
 	# status = fields.Selection(
 	# 	[
 	# 		('1','Issued'),
