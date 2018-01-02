@@ -2,12 +2,12 @@
 
 from odoo import api, fields, models
 
-class BookDetails(models.Model):
+class ProductTemplate(models.Model):
 	_inherit = 'product.template'
 	role_librarian =fields.Boolean(string="Librarian")
 	
 	book_type = fields.Many2many('material', string='Book Type')
-	isbn = fields.Integer(string='ISBN')
+	isbn = fields.Char(string='ISBN')
 	description = fields.Text(string='Description')
 
 	language = fields.Selection(

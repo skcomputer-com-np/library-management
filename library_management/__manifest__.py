@@ -25,6 +25,9 @@ This is description for library management system.
         'report/report_menu_item.xml',
         'report/student_report.xml',
         'report/student_wizard_report_view.xml',
+        'security/account_security.xml',
+        'security/ir.model.access.csv',
+        
     ],
     'demo': [
     ],

@@ -9,10 +9,11 @@
 					<sheet>
 						<group>
 							<group>
-								<field name="stud_id"/>
-								<field name="name"/>
-								<field name="issue_date"/>
-								<field name="due_date"/>
+								<field name="stud_id" required='1'/>
+								<field name="name" required='1'/>
+								<field name="isbn" required='1'/>
+								<field name="issue_date" required='1'/>
+								<field name="due_date" required='1'/>
 							</group>
 						</group>
 					</sheet>
@@ -27,6 +28,7 @@
 				<tree string="Issue Book">
 					<field name="stud_id"/>
 					<field name="name"/>
+					<field name="isbn"/>
 					<field name="issue_date"/>
 					<field name="due_date"/>
 				</tree>

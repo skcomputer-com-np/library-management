@@ -7,7 +7,7 @@
 			<field name="inherit_id" ref="product.product_template_only_form_view"/>
 			<field name="arch" type="xml">
 				<xpath expr="//label[@for='name']" position="before">
-					<div>
+					<div groups='library_management.library_group_librarian'>
 						<field name="role_librarian"  widget="checkbox"/>
 						<label for='Librarian' string='Librarian'/>
 					</div>

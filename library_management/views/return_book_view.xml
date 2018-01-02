@@ -9,13 +9,14 @@
 					<sheet>
 						<group>
 							<group>
-								<field name="stud_name"/>
-								<field name="name"/>
-								<field name="issue_date"/>
-								<field name="due_date"/>
-								<field name="return_date"/>
-								<field name="status"/>
-								<field name="fine" />
+								<field name="stud_name" required='1'/>
+								<field name="name" required='1'/>
+								<field name="isbn" required='1'/>
+								<field name="issue_date" required='1'/>
+								<field name="due_date" required='1'/>
+								<field name="return_date" required='1'/>
+								<field name="status" required='1'/>
+								<field name="fine"/>
 							</group>
 						</group>
 					</sheet>
@@ -30,6 +31,7 @@
 				<tree string="Return Book">
 					<field name="stud_name"/>
 					<field name="name"/>
+					<field name="isbn"/>
 					<field name="issue_date"/>
 					<field name="due_date"/>
 					<field name="return_date"/>
