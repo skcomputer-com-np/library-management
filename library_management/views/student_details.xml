@@ -22,7 +22,7 @@
 							'invisible': ['|',('is_status','=','faculty'),'|',('is_status','=','admin')],
 							}">
 							<group>
-								<field name="gender"/>
+								<field name="gender" required='1'/>
 								<field name="divisoin"/>
 								<field name="date"/>
 							</group>
@@ -33,11 +33,10 @@
 <!-- start -->
 					<xpath expr="//page[@name='student']" position="after">
 						<page string="Librarian" name='Librarian' attrs="{
-							'invisible': ['|',('is_status','=','admin'),'|',('is_status','=','stud')]
+							'invisible': [('is_status','=','stud')]
 							}">
 							<group>
 								<field name="gender"/>
-								<field name="divisoin"/>
 								<field name="date"/>
 							</group>
 						</page>
