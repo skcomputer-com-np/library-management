@@ -31,6 +31,7 @@
 					<field name="isbn"/>
 					<field name="issue_date"/>
 					<field name="due_date"/>
+					<!-- <field name="status"/> -->
 				</tree>
 			</field>
 		</record>

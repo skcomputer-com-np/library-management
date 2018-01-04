@@ -70,6 +70,7 @@ class ReturnBook(models.Model):
 
 		obj=super(ReturnBook,self).create(vals)
 
+
 		# result = self.env['issue.book'].search([('stud_id', '=', obj.stud_name.id), ('name', '=', obj.name.id),('isbn','=',obj.isbn)])
 		# if result:
 		# 	result.unlink()

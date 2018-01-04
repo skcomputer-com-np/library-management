@@ -4,7 +4,7 @@ from odoo import api, fields, models,_
 from odoo.exceptions import UserError,ValidationError
 import datetime
 class IssueBook(models.Model):
-	_sql_constratints=[('stud_id','name','UNIQUE(isbn)','issue_date','due_date')]
+	_sql_constratints=[('stud_id','name','unique(isbn)','issue_date','due_date')]
 	_name = "issue.book"
 	_description = "Issue Book Details"
 
@@ -13,12 +13,7 @@ class IssueBook(models.Model):
 	isbn = fields.Char('ISBN')
 	issue_date = fields.Date(string='Issued Date',default=datetime.datetime.now())
 	due_date = fields.Date(string='Due Date')
-	# status = fields.Selection(
-	# 	[
-	# 		('1','Issued'),
-	# 		('2','Returned'),
-	# 		('0','Other')
-	# 	])
+	# status = fields.Boolean(string="Is return")
 
 	# ./odoo-bin -d asd --db-filter=asd --addons-path=addons,../library-management -u library_management
 
