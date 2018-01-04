@@ -18,8 +18,8 @@ class ProductTemplate(models.Model):
 			('gujarati', 'Gujarati'),
 			('other', 'Other'),
 		])
-	author = fields.Many2one('author.details',string='Author Name')
-	publisher =  fields.Many2one('publisher.details',string='Publisher Name')
+	author = fields.Many2one('res.partner',domain=[('is_status', "=", "author")])
+	publisher =  fields.Many2one('res.partner',domain=[('is_status', "=", "publisher")])
 	copies = fields.Integer(string="Copies")
 	date = fields.Date(string="Date")
 

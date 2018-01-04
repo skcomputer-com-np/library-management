@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+    <data noupdate="1">
         <!-- Book Details note for M@M(6,0)-->
         <record id="demo_book_details_id1" model="product.template">
             <field name="role_librarian" eval="True"></field>

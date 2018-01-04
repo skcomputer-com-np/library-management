@@ -10,6 +10,8 @@ class StudentDetails(models.Model):
 		[
 			('stud','Student'),
 			('librarian','Librarian'),
+			('author','Author'),
+			('publisher','Publisher'),
 		],
 
 		default='stud'
@@ -54,7 +56,7 @@ class StudentDetails(models.Model):
 	@api.constrains('email')
 	def check_email(self):
 		EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
-		if not EMAIL_REGEX.match(self.email):
+		if self.email and not EMAIL_REGEX.match(self.email):		
 			raise ValidationError(_('Email id invalid..!'))
 
 

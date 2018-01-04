@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+    <data noupdate="1">
         <!-- Material Details (Book E-book cd)-->
         <record id="demo_material_id1" model="material">
             <field name="name">book</field>

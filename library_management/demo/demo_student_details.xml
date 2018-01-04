@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+    <data noupdate="1">
         <!-- student Details -->
         <record id="demo_student_details_id1" model="res.partner">
             <field name="is_status">stud</field>

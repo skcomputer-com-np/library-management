@@ -4,6 +4,7 @@ from odoo import api, fields, models,_
 from odoo.exceptions import UserError,ValidationError
 import datetime
 class IssueBook(models.Model):
+	_sql_constratints=[('stud_id','name','UNIQUE(isbn)','issue_date','due_date')]
 	_name = "issue.book"
 	_description = "Issue Book Details"
 

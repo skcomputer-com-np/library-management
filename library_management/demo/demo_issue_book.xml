@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+    <data noupdate="1">
         <!-- Issue book -->
         <record id="demo_issue_book_id1" model="issue.book">
             <field name="stud_id" ref="library_management.demo_student_details_id1"/>

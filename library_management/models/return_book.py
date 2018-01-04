@@ -21,14 +21,17 @@ class ReturnBook(models.Model):
 	# domain=[('is_status', '=', "stud")]
 	# ./odoo-bin -d asd --db-filter=asd --addons-path=addons,../library-management -u library_management
 
-	@api.onchange('name')
+	@api.onchange('isbn')
 	def onchange_set_value(self):
 		try:
-			if self.stud_name and self.name:
-				obj = self.env['issue.book'].search([('stud_id', '=', self.stud_name.id)])
+			if self.stud_name and self.name and self.isbn:
+				obj = self.env['issue.book'].search([('stud_id', '=', self.stud_name.id),('isbn', '=', self.isbn)])
 				print (obj)
 				self.issue_date = obj.issue_date
 				self.due_date = obj.due_date
+			else:
+				self.issue_date ="" 
+				self.due_date =""
 				
 		except Exception as e:
 			pass
@@ -67,9 +70,9 @@ class ReturnBook(models.Model):
 
 		obj=super(ReturnBook,self).create(vals)
 
-		result = self.env['issue.book'].search([('stud_id', '=', obj.stud_name.id), ('name', '=', obj.name.id),('isbn','=',obj.isbn)])
-		if result:
-			result.unlink()
+		# result = self.env['issue.book'].search([('stud_id', '=', obj.stud_name.id), ('name', '=', obj.name.id),('isbn','=',obj.isbn)])
+		# if result:
+		# 	result.unlink()
 
 		#raise Warning(_("You Would require to pay {}".format(vals['fine'])))
 		return obj

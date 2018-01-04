@@ -19,11 +19,11 @@
 
 					<xpath expr="//page[@name='sales_purchases']" position="after">
 						<page string="Student" name='student' attrs="{
-							'invisible': [('is_status','=','librarian')]
+							'invisible': ['|',('is_status','=','librarian'),'|',('is_status','=','author'),'|',('is_status','=','publisher')]
 							}">
 							<group groups="library_management.library_group_student">
 								<field name="gender"/>
-								<field name="divisoin" required='1'/>
+								<field name="divisoin"/>
 								<field name="date"/>
 							</group>
 						</page>
@@ -33,7 +33,7 @@
 <!-- start -->
 					<xpath expr="//page[@name='student']" position="after">
 						<page string="Librarian" name='Librarian' attrs="{
-							'invisible': [('is_status','=','stud')]
+							'invisible':['|',('is_status','=','stud'),'|',('is_status','=','author'),'|',('is_status','=','publisher')]
 							}">
 							<group>
 								<field name="gender"/>
