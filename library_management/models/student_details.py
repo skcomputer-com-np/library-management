@@ -4,7 +4,8 @@ from odoo import api, fields, models,_
 from odoo.exceptions import UserError,ValidationError
 
 class StudentDetails(models.Model):
-	_inherit = 'res.partner'
+	_inherit = "res.partner"
+	# _inherit = ['res.partner', 'mail.thread']
 
 	is_status = fields.Selection(
 		[
@@ -59,6 +60,20 @@ class StudentDetails(models.Model):
 		if self.email and not EMAIL_REGEX.match(self.email):		
 			raise ValidationError(_('Email id invalid..!'))
 
+	@api.one
+	def notify_user(self):
+		template = self.env.ref('library_management.registration',raise_if_not_found=False)
+		template.send_mail(self.id)
 
 
+	@api.model
+	def create(self,vals):
+		obj=super(StudentDetails,self).create(vals)
+		self.notify_user()
+		return obj
+	# @api.model
+	# def create(self,values):
+	#     obj2=super(StudentDetails,self).create(values)
+	#     self.notify_user()
+	# 	return obj2
 	# ./odoo-bin -d asd --db-filter=asd --addons-path=addons,../library-management -u library_management
