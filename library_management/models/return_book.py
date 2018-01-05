@@ -15,7 +15,8 @@ class ReturnBook(models.Model):
 	issue_date 		= fields.Char(string='Issue Date')
 	due_date 		= fields.Char(string='Due Date')
 	return_date 	= fields.Char(string='Return Date',default=datetime.now().date())
-	fine 			= fields.Float(string='Fine')
+	fine_per_day 	= fields.Float(string='Fine Per Day')
+	fine 			= fields.Float(string='Total Fine')
 	status 			= fields.Boolean(string="Is return")
 
 	# domain=[('is_status', '=', "stud")]

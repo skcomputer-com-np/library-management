@@ -5,7 +5,10 @@ from odoo import api, fields, models
 class ProductTemplate(models.Model):
 	_inherit = 'product.template'
 	role_librarian =fields.Boolean(string="Librarian")
-	
+
+	_sql_constraints = [
+    ('ISBN_unique', 'unique(isbn)', ' Please enter unique isbn.')
+    ]
 	book_type = fields.Many2many('material', string='Book Type')
 	isbn = fields.Char(string='ISBN')
 	description = fields.Text(string='Description')
@@ -23,6 +26,9 @@ class ProductTemplate(models.Model):
 	copies = fields.Integer(string="Copies")
 	date = fields.Date(string="Date")
 
+	@api.constrains('isbn')
+	def unique_isbn(self):
+		pass
 
 class Materials(models.Model):
 	_name="material"

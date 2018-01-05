@@ -26,11 +26,11 @@ This is description for library management system.
         'security/ir.model.access.csv',
     ],
     'demo': [
-        'demo/demo_student_details.xml',
-        'demo/demo_materials.xml',
-        'demo/demo_book_details.xml',
-        'demo/demo_issue_book.xml',
-        'demo/demo_return_book.xml',
+        # 'demo/demo_student_details.xml',
+        # 'demo/demo_materials.xml',
+        # 'demo/demo_book_details.xml',
+        # 'demo/demo_issue_book.xml',
+        # 'demo/demo_return_book.xml',
     ],
     'qweb': [
     ],
