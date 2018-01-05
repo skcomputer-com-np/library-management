@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
+		<!-- for filter start -->
+		<record id="view_book_search" model="ir.ui.view">
+	        <field name="name">book.search</field>
+	        <field name="model">product.template</field>
+	        <field name="arch" type="xml">
+	            <search string="Book Search">
+	                <filter string="All" name="" domain="[('role_librarian', '=','True')]"/>
+	                <separator/>
+	                <group expand="1" string="Group By">
+	                    <filter string="Atuhor" name="author" context="{'group_by':'author'}"/>
+	                    <filter string="Publisher" name="publisher" context="{'group_by':'publisher'}"/>
+	                    <filter string="Language" name="language" context="{'group_by':'language'}"/>
+	                </group>
+	            </search>
+	        </field>
+	    </record>
+		
+		<!-- for filter end -->
+
+		<!-- Default filter(Not working) -->
+		<!-- <record id="action_default1" model="ir.actions.act_window">
+            <field name="name">Book Details</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+            <field name="domain">[('role_librarian', '=','True')]</field>
+        </record> -->
+
 		<record id="view_book_details" model="ir.ui.view">
 			<field name="name">view.book.details</field>
 			<field name="model">product.template</field>

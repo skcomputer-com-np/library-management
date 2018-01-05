@@ -8,7 +8,7 @@ This is description for library management system.
     """,
 
     'depends': [
-        'sale','web',
+        'sale','web','mail','contacts',
     ],
 
     'data': [

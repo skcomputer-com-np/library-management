@@ -6,6 +6,17 @@
 			<field name="model">issue.book</field>
 			<field name="arch" type="xml">
 				<form string="Issue Book">
+					<header>
+	                    <button name="state_book_issue" type="object" string="Book Issue" 
+	                    	class="oe_highlight" attrs="{
+							'invisible':[('state','=','book_issue')]
+							}"/>
+	                    <button name="state_book_return" type="object" string="Book Return" 
+	                    	class="oe_highlight" attrs="{
+							'invisible':[('state','=','book_return')]
+							}"/>
+					<field name="state" widget="statusbar"/>
+	            	</header>
 					<sheet>
 						<group>
 							<group>
@@ -31,6 +42,7 @@
 					<field name="isbn"/>
 					<field name="issue_date"/>
 					<field name="due_date"/>
+					<field name="state"/>
 					<!-- <field name="status"/> -->
 				</tree>
 			</field>
