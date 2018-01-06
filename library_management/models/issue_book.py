@@ -20,14 +20,10 @@ class IssueBook(models.Model):
 			('book_return','Return'),
 		])
 
-	# ./odoo-bin -d asd --db-filter=asd --addons-path=addons,../library-management -u library_management
-
-
 	@api.constrains('isbn')
-	def check_isbn(self):		
+	def check_isbn(self):
 		if not self.isbn:
 			raise ValidationError(_('Invalid isbn number...!'))
-
 	# @api.onchange('isbn')
 	# def onchange_isbn(self):
 	# 	obj = self.env['product.template'].search([('id', '=', self.name.id),('isbn', '=', self.isbn)])
@@ -35,13 +31,18 @@ class IssueBook(models.Model):
 	#         'state': 'book_avaii',
 	#     })
 			
-
 	@api.one
 	def state_book_issue(self):
-	    self.write({
-	        'state': 'book_issue',
-	    })
-
+		obj = self.env['product.template'].search([('isbn','=',self.isbn)])
+		if obj:
+			print("+================>"+obj.state)
+			if obj.state == 'avail':
+				obj.write({'book_avail':obj.book_avail - 1})
+				self.write({'state': 'book_issue'})
+			else:
+				raise UserError(_("Book is not availble having isbn ",self.isbn))
+		else:
+			raise UserError(_("No book found having isbn ",self.isbn))
 	@api.one
 	def state_book_return(self):
 	    self.write({

@@ -13,60 +13,35 @@
 						</div>
 					</xpath>
 
-					<!-- <xpath expr="//label[@for='street']" position="before">
-						<field name="gender"/>
-					</xpath> -->
-
-					<xpath expr="//page[@name='sales_purchases']" position="after">
-						<page string="Student" name='student' attrs="{
-							'invisible': ['|',('is_status','=','librarian'),'|',('is_status','=','author'),'|',('is_status','=','publisher')]
-							}">
-							<group groups="library_management.library_group_student">
-								<field name="gender"/>
-								<field name="divisoin"/>
-								<field name="date"/>
-							</group>
-						</page>
+<!-- mobile replace -->
+					<xpath expr="//field[@name='mobile']" position="replace">
+						<field name="mobile" widget='mobile' required='1'/>
 					</xpath>
 
-<!-- this is only for example (you can comment below code ) -->
-<!-- start -->
-					<xpath expr="//page[@name='student']" position="after">
-						<page string="Librarian" name='Librarian' attrs="{
-							'invisible':['|',('is_status','=','stud'),'|',('is_status','=','author'),'|',('is_status','=','publisher')]
+<!--Student start -->
+					<xpath expr="//page[@name='sales_purchases']" position="after">
+						<page string="Student" name='student' attrs="{
+							'invisible':['|',('is_status','=','librarian'),'|',('is_status','=','author'),'|',('is_status','=','publisher')]
 							}">
 							<group>
-								<field name="gender"/>
-								<field name="date"/>
+								<field name="rno" attrs="{
+										'required':[('is_status','=','stud')]
+									}"/>
+
+								<field name="division" attrs="{
+										'required':[('is_status','=','stud')]
+									}"/>
+								<field name="gender" attrs="{
+										'required':[('is_status','=','stud')]
+									}"/>
+								<field name="date" attrs="{
+										'required':[('is_status','=','stud')]
+									}"/>
 							</group>
 						</page>
 					</xpath>	
-<!--stop-->
+<!--Student stop-->
 				</field>
 		</record>
-
-		<!-- <record id="tree_student" model="ir.ui.view">
-			<field name="name">tree.student</field>
-			<field name="model">student.details</field>
-			<field name="arch" type="xml">
-				<tree string="Student Details">
-					<field name="stud_name"/>
-					<field name="gender"/>
-					<field name="divisoin"/>
-					<field name="city"/>
-					<field name="mobile_no"/>
-				</tree>
-			</field>
-		</record>
-
-		<record id="action_student" model="ir.actions.act_window">
-			<field name="name">Student Details</field>
-			<field name="type">ir.actions.act_window</field>
-			<field name="res_model">student.details</field>
-			<field name="view_type">form</field>
-			<field name="view_mode">tree,form</field>
-		</record> -->
-
-		<!-- <menuitem id="menuitem_student_view" name="Student" sequence="5" action="action_student" parent="menu_book_menu"/> -->
 	</data>
 </odoo>
