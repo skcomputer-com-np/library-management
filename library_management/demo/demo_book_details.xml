@@ -4,9 +4,11 @@
         <!-- Book Details note for M@M(6,0)-->
         <record id="demo_book_details_id1" model="product.template">
             <field name="role_librarian" eval="True"></field>
-            <field name="name">python</field>
+            <field name="name">Python</field>
             <field name="book_type"  eval="[(6,0,[ref('demo_material_id1')])]"/> 
-            <field name="isbn">001</field>
+            <field name="isbn">p001</field>
+            <field name="copies">3</field>
+            <field name="standard_price">400</field>
         </record>
     </data>
 </odoo>

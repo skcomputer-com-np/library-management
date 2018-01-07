@@ -19,8 +19,7 @@ class ReturnBook(models.Model):
 	fine 			= fields.Float(string='Total Fine')
 	status 			= fields.Boolean(string="Is return")
 
-	# domain=[('is_status', '=', "stud")]
-	# ./odoo-bin -d asd --db-filter=asd --addons-path=addons,../library-management -u library_management
+	# name_ids 	= fields.Many2one('fine.resion')
 
 	@api.onchange('isbn')
 	def onchange_set_value(self):
@@ -79,3 +78,12 @@ class ReturnBook(models.Model):
 		#raise Warning(_("You Would require to pay {}".format(vals['fine'])))
 		return obj
 	
+
+# class FineResion(models.Model):
+# 	_name = "fine.resion"
+
+# 	name = fields.Selection([			
+# 			('regular','Regular'),
+# 			('damage','Damaged'),
+# 			('lost','Lost'),
+# 		],default='regular')

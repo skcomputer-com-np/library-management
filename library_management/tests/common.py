@@ -9,11 +9,13 @@ class Common(TransactionCase):
          # for student details 
         self.student = self.env['res.partner'].create({
 
-                'name': 'sushil',
+                'name': 'Chirag',
                 'mobile' : '8511444317',
                 'email':"sushil@gmail.com",
                 'gender':"male",
-                'divisoin': '1'
+                'division': '1'
+                'rno': 'BL68'
+                'date': '2018-01-02'
             })
 
 
@@ -43,7 +45,7 @@ class Common(TransactionCase):
         self.book   =   self.env['product.template'].create({
                 'name'              : 'C++',
                 'book_type'         : [(6,0,[self.material_book.id,],[self.material_eboook,])],
-                'isbn'              : '001',
+                'isbn'              : 'c001',
                 'publisher'         : self.publisher.id,
                 'author'            : self.author.id,
                 'copies'            : 5,
@@ -55,22 +57,22 @@ class Common(TransactionCase):
         self.issue  = self.env['issue.book'].create({
             'stud_id'   :   self.student.id,
             'name'      :   self.book.id,
-            'isbn'      :   '001',
+            'isbn'      :   'c001',
             'issue_date':   '01/02/2018',
             'due_date'  :   '01/17/2018',
             })
 
         # for return book
-        self.return_book  = self.env['return.book'].create({
-            'stud_name'     :   self.student.id,
-            'name'          :   self.book.id,
-            'isbn'          :   '001',
-            'issue_date'    :   '2018-01-02',
-            'due_date'      :   '2018-01-03',
-            'return_date'   :   '2018-01-04',
-            'fine'          :   0.00,
-            'status'        :   True,
-            })
+        # self.return_book  = self.env['return.book'].create({
+        #     'stud_name'     :   self.student.id,
+        #     'name'          :   self.book.id,
+        #     'isbn'          :   '001',
+        #     'issue_date'    :   '2018-01-02',
+        #     'due_date'      :   '2018-01-03',
+        #     'return_date'   :   '2018-01-04',
+        #     'fine'          :   0.00,
+        #     'status'        :   True,
+        #     })
 
 
 

@@ -9,7 +9,7 @@
 				
 					<xpath expr="//field[@name='company_type']" position="replace">
 						<div>
-							<field name="is_status"  widget="radio" options="{'horizontal': true}" required='1'/>
+							<field name="is_status"  widget="radio" options="{'horizontal': true}" required='1' groups='library_management.library_group_librarian' />
 						</div>
 					</xpath>
 

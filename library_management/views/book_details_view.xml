@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
+		<record id="view_book_search" model="ir.ui.view">
+	        <field name="name">book.search</field>
+	        <field name="model">product.template</field>
+	        <field name="arch" type="xml">
+	            <search string="Book Search">
+	                <filter string="All" name="" domain="[('role_librarian', '=','True')]"/>
+	                <filter string="Available" name="" domain="[('state', '=','avail')]"/>
+	                <filter string="Not Available" name="" domain="[('state', '=','not_avail')]"/>
+	                <separator/>
+	                <group expand="1" string="Group By">
+	                    <filter string="Atuhor" name="author" context="{'group_by':'author'}"/>
+	                    <filter string="Publisher" name="publisher" context="{'group_by':'publisher'}"/>	                    
+	                </group>
+	            </search>
+	        </field>
+	    </record>
+
 		<record id="view_book_details" model="ir.ui.view">
 			<field name="name">view.book.details</field>
 			<field name="model">product.template</field>
 			<field name="inherit_id" ref="product.product_template_only_form_view"/>
 			<field name="arch" type="xml">
 				<header>
-					<button name="state_book_request" type="object" string="Request" 
-	                    	class="oe_highlight" attrs="{ 
-	                    	'invisible':['|',('state','=','avail'),'|',
-	                    					 ('state','=','not_avail'),'|',
-	                    					 ('state','=','req'),'|',
-	                    					 ('req_book','=',False)]
-	                    	}"/>
-
 	                <button name="state_book_avail" type="object" string="Available" 
 	                    	class="oe_highlight" attrs="{ 
 	                    	'invisible':[
-	                    					 ('req_book','=',True),]
-	                    	}"/>
+	                    				'|',('state','=','not_avail'),'|',('state','=','avail'),'|',('role_librarian','=',False)
+	                    				]}"/>
 					<field name="state"  widget="statusbar"/>
 				</header>
 <!-- Librarian -->
@@ -29,15 +38,6 @@
 						<label for='Librarian' string='Librarian'/>
 					</div>
 				</xpath>
-
-<!-- Request Book -->
-				<xpath expr="//label[@for='Librarian']" position="after">
-					<div>
-						<field name="req_book" widget='checkbox' attrs="{'invisible':[('role_librarian', '=' ,False)]}"/>
-						<label for='request' string='Request book'/>
-					</div>
-				</xpath>
-
 <!-- book type -->
 				<xpath expr="//field[@name='name']" position="after">
 					<div>
@@ -50,23 +50,23 @@
 
 				<xpath expr="//field[@name='type']" position="after">
 					<field name="isbn" attrs="{
-						'invisible':['|',('role_librarian', '=' ,False),'|',
-										('req_book','=',True)],
+						'invisible':[('role_librarian', '=' ,False)],
 						'required':[('role_librarian','=',True)]}"/>
 
 					<field name="language" 
 						   widget='many2many_tags' 
 						   attrs="{
-						   			'invisible':[('role_librarian', '=' ,False)] }"/>					
+						   			'invisible':[('role_librarian', '=' ,False)]}"/>					
+				</xpath>
+
+				<xpath expr="//field[@name='standard_price']" position="replace">
+						<field name="standard_price" required='1'/>
 				</xpath>
 
 				<xpath expr="//field[@name='list_price']" position="replace">
 					<field name="copies" attrs="{
-
-						'invisible':['|',('role_librarian', '=' ,False),'|',
-									            ('req_book','=',True)],
-
-						'required': [('req_book','=',False)]}"/>
+						'invisible':[('role_librarian', '=' ,False)],
+						'required': [('role_librarian', '=' ,True)]}"/>
 				</xpath>
 
 				<xpath expr="//field[@name='copies']" position="after">
@@ -75,31 +75,13 @@
 					<field name="publisher" attrs="{'invisible':[('role_librarian', '=' ,False)]}"/>
 					<field name="description" attrs="{'invisible':[('role_librarian', '=' ,False)]}"/>
 
-					<field name="book_avail" attrs="{'invisible':['|',('role_librarian', '=' ,False),'|',('req_book','=',True)]}"/>
-				</xpath>
-				
+					<field name="book_avail" attrs="{
+						'invisible':[('role_librarian', '=' ,False)]}"/>
+				</xpath>								
 
-
-
-				<xpath expr="//page[@name='general_information']" position="after">
-						<page string="Student" name='student' attrs="{
-							'invisible': ['|',('req_book','=',False)],
-							}">
-							<group>
-								<field name="stud_ids" 
-									   attrs="{'required': [('req_book','=',True)]}"/>
-								<field name="division"
-									   attrs="{'required': [('req_book','=',True)]}"  />
-								<field name="rno"
-									   attrs="{'required': [('req_book','=',True)]}" />
-							</group>
-						</page>
-					</xpath>
-
-				<!-- <xpath expr="//field[@name='value_ids']" position="after">
+				<xpath expr="//page[@name='variants']/field[@name='attribute_line_ids']/tree/field[@name='value_ids']" position="replace">
 					<field name="qty"/>
-				</xpath> -->
-
+				</xpath>
 				
 			</field>
 		</record>

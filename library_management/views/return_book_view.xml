@@ -15,7 +15,6 @@
 								<field name="issue_date" required='1'/>
 								<field name="due_date" required='1'/>
 								<field name="return_date" required='1'/>
-								<field name="status" required='1'/>
 								<field name="fine"/>
 							</group>
 						</group>

@@ -3,7 +3,7 @@
     <data noupdate="1">
         <!-- Material Details (Book E-book cd)-->
         <record id="demo_material_id1" model="material">
-            <field name="name">book</field>
+            <field name="name">Book</field>
         </record>
     </data>
 </odoo>

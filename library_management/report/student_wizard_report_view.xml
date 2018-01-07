@@ -19,7 +19,7 @@
                             <tr>
                                <td><t t-raw="doc.name"/></td>
                                <td><t t-raw="doc.gender"/></td>
-                               <td><t t-raw="doc.divisoin"/></td>
+                               <td><t t-raw="doc.division"/></td>
                                <td><t t-raw="doc.date"/></td>
                             </tr>
                         </t>

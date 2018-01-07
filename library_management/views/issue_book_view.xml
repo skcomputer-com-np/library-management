@@ -9,11 +9,16 @@
 					<header>
 	                    <button name="state_book_issue" type="object" string="Book Issue" 
 	                    	class="oe_highlight" attrs="{
-							'invisible':[('state','=','book_issue')]
+							'invisible':['|',('state','=','book_return'),'|',('state','=','book_issue')]
 							}"/>
 	                    <button name="state_book_return" type="object" string="Book Return" 
 	                    	class="oe_highlight" attrs="{
-							'invisible':[('state','=','book_return')]
+							'invisible':['|',('state','=','book_return'),'|',('state','=','draft')]
+							}"/>
+
+						<button name="checkFine" type="object" string="Chek Fine" 
+	                    	class="oe_highlight" attrs="{
+							'invisible':['|',('state','=','book_return'),'|',('state','=','draft')]
 							}"/>
 					<field name="state" widget="statusbar"/>
 	            	</header>
@@ -27,6 +32,18 @@
 								<field name="due_date" required='1'/>
 							</group>
 						</group>
+						<notebook>
+							<page string="Return Details" name='fine_details'
+										attrs="{'invisible': [('state','=','draft')]}" >
+								<group>
+									<field name="return_date"
+											attrs="{'required': [('state','=','book_issue')]}"/>
+									<field name="fine_resion"
+											attrs="{'required': [('state','=','book_issue')]}"/>
+									<field name="fine" readonly="1"/>
+								</group>
+							</page>
+						</notebook>				
 					</sheet>
 				</form>
 			</field>
@@ -47,6 +64,8 @@
 				</tree>
 			</field>
 		</record>
+
+
 
 		<record id="action_issue_book" model="ir.actions.act_window">
 			<field name="name">Library</field>

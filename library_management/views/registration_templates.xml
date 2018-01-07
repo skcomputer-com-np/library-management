@@ -12,13 +12,14 @@
             <field name="body_html"><![CDATA[
             <ul class="o_mail_thread_message_tracking">
                 <h1>Welcome to library</h1>
-                <h1>Hello</h1>
                 <li>
                     Name: <span>${object.name}</span>
                 </li>
                 <li>
                     Role: <span>${object.is_status}</span>
                 </li>
+
+                <p>Now you can member of library management system</p>
        		</ul>
             ]]></field>
         </record>

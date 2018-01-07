@@ -13,11 +13,7 @@ class StudentDetails(models.Model):
 			('librarian','Librarian'),
 			('author','Author'),
 			('publisher','Publisher'),
-		],
-
-		default='stud'
-
-		)
+		],default='stud')
 
 	gender = fields.Selection(
 		[
@@ -51,12 +47,12 @@ class StudentDetails(models.Model):
 		template.send_mail(obj.id)
 		return obj
 
-
-
-
-
-
-
+	@api.model
+	def create(self,vals):
+		obj 	 = super(StudentDetails,self).create(vals)
+		template = self.env.ref('library_management.registration',raise_if_not_found=False)
+		template.send_mail(obj.id)
+		return obj
 
 
 
@@ -83,7 +79,3 @@ class StudentDetails(models.Model):
 	# 	EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
 	# 	if self.email and not EMAIL_REGEX.match(self.email):		
 	# 		raise ValidationError(_('Email id invalid..!'))
-
-
-
-	# ./odoo-bin -d asd --db-filter=asd --addons-path=addons,../library-management -u library_management
