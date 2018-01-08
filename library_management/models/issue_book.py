@@ -9,14 +9,15 @@ class IssueBook(models.Model):
 	_name = "issue.book"
 	_description = "Issue Book Details"
 
-	stud_id = fields.Many2one('res.partner','Student Name', domain=[('is_status', "=", "stud")])
-	name = fields.Many2one('product.template', 'Book Name',domain=[('role_librarian', '=', True)])
+	stud_id = fields.Many2one('res.partner','Student', domain=[('is_status', "=", "stud")])
+	name = fields.Many2one('product.template', 'Book',domain=[('role_librarian', '=', True)])
 	isbn = fields.Char('ISBN')
 	issue_date = fields.Date(string='Issued Date',default=datetime.datetime.now())
 	due_date = fields.Date(string='Due Date')
 	state = fields.Selection([			
 			('draft','Draft'),
 			('book_issue','Issue'),
+			('fine_cal','Fine Calculated'),
 			('book_return','Return'),
 		],default='draft')
 
@@ -25,8 +26,7 @@ class IssueBook(models.Model):
 	fine_resion 	= fields.Selection([			
 			('regular','Regular'),
 			('damage','Damaged'),
-			('lost','Lost'),
-		],default='regular')
+			('lost','Lost')])
 
 	fine 			= fields.Float(string='Total Fine')
 
@@ -71,24 +71,31 @@ class IssueBook(models.Model):
 		self.write({'state': 'book_return'})
 		
 	@api.one
-	def checkFine(self):		
-		obj = self.env['product.template'].search([('isbn','=',self.isbn)])
-		if obj:
-			return_date1 =  self.return_date
-			due_date1  	 =  self.due_date
-			return_date = return_date1.split('-')
-			due_date    = due_date1.split('-')
-			diff = date(int(due_date[0]),int(due_date[1]),int(due_date[2]))-date(int(return_date[0]),int(return_date[1]),int(return_date[2]))		
-			if diff.days < 0:				
-				if self.fine_resion == "regular":
-					self.fine = abs(diff.days)*1
+	def checkFine(self):
+		self.write({'state': 'fine_cal'})		
+		
+
+	@api.onchange('fine_resion')
+	def fineCalculated(self):
+		if self.state == 'fine_cal' :
+			obj = self.env['product.template'].search([('isbn','=',self.isbn)])		
+			if obj :
+				return_date1 =  self.return_date
+				due_date1  	 =  self.due_date
+				return_date = return_date1.split('-')
+				due_date    = due_date1.split('-')
+				diff = date(int(due_date[0]),int(due_date[1]),int(due_date[2]))-date(int(return_date[0]),int(return_date[1]),int(return_date[2]))		
+				if diff.days < 0:				
+					if self.fine_resion == "regular":
+						self.fine = abs(diff.days)*1
+				else:
+					self.fine = 00.0;		
+
+				if self.fine_resion == "damage":			    
+						self.fine =(obj.standard_price*10)/100
+				elif self.fine_resion == "lost":			    
+						self.fine = (obj.standard_price*70)/100
+
 			else:
-				self.fine = 00.0;		
+				raise UserError("There is no any book having isbn ",self.isbn)
 
-			if self.fine_resion == "damage":			    
-					self.fine =(obj.standard_price*10)/100
-			elif self.fine_resion == "lost":			    
-					self.fine = (obj.standard_price*70)/100
-
-		else:
-			raise UserError("There is no any book having isbn ",self.isbn)

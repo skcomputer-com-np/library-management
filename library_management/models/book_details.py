@@ -44,7 +44,6 @@ class ProductTemplate(models.Model):
         else:
             self.write({'state':'avail'})
 
-
     @api.one
     def state_book_avail(self):
         if self.copies:
@@ -52,6 +51,16 @@ class ProductTemplate(models.Model):
             self.write({'book_avail':self.copies})
         else:
             raise UserError(_("Fill book copies field...!"))
+
+
+    # @api.model
+    # def create(self,vals):
+    #     result = super(ProductTemplate,self).create(vals)        
+    #     for i in vals :
+    #         print("key {}  values {}".format(i,vals[i]))
+    #     print(vals['attribute_line_ids'][0][2]['qty'])
+    #     print(vals['attribute_line_ids'][0][2]['attribute_id'])
+    #     return result
     
 class Materials(models.Model):
     _name ="material"

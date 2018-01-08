@@ -9,17 +9,20 @@
 					<header>
 	                    <button name="state_book_issue" type="object" string="Book Issue" 
 	                    	class="oe_highlight" attrs="{
-							'invisible':['|',('state','=','book_return'),'|',('state','=','book_issue')]
-							}"/>
-	                    <button name="state_book_return" type="object" string="Book Return" 
-	                    	class="oe_highlight" attrs="{
-							'invisible':['|',('state','=','book_return'),'|',('state','=','draft')]
+							'invisible':['|',('state','=','book_return'),'|',('state','=','book_issue'),'|',('state','=','fine_cal')]
 							}"/>
 
 						<button name="checkFine" type="object" string="Chek Fine" 
 	                    	class="oe_highlight" attrs="{
-							'invisible':['|',('state','=','book_return'),'|',('state','=','draft')]
+							'invisible':['|',('state','=','book_return'),'|',('state','=','draft'),
+							'|',('state','=','fine_cal')]
 							}"/>
+
+	                    <button name="state_book_return" type="object" string="Book Return" 
+	                    	class="oe_highlight" attrs="{
+							'invisible':['|',('state','=','book_return'),'|',('state','=','book_issue'),'|',('state','=','draft')]
+							}"/>
+
 					<field name="state" widget="statusbar"/>
 	            	</header>
 					<sheet>
@@ -34,12 +37,13 @@
 						</group>
 						<notebook>
 							<page string="Return Details" name='fine_details'
-										attrs="{'invisible': [('state','=','draft')]}" >
+										attrs="{'invisible': ['|',('state','=','draft'),'|',('state','=','book_issue')]}" >
 								<group>
 									<field name="return_date"
-											attrs="{'required': [('state','=','book_issue')]}"/>
+											attrs="{'readonly': [('state','=','book_return')]}"/>
 									<field name="fine_resion"
-											attrs="{'required': [('state','=','book_issue')]}"/>
+											attrs="{
+											'readonly': [('state','=','book_return')]}"/>
 									<field name="fine" readonly="1"/>
 								</group>
 							</page>
@@ -76,6 +80,6 @@
 		</record>
 
 
-		<menuitem id="menu_issue_book_view" name="Issue Books" sequence="4" action="action_issue_book" parent="menu_book"/>
+		<menuitem id="menu_issue_book_view" name="Issue Books" sequence="4" action="action_issue_book"/>
 	</data>
 </odoo>

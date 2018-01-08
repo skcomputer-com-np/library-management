@@ -47,14 +47,6 @@ class StudentDetails(models.Model):
 		template.send_mail(obj.id)
 		return obj
 
-	@api.model
-	def create(self,vals):
-		obj 	 = super(StudentDetails,self).create(vals)
-		template = self.env.ref('library_management.registration',raise_if_not_found=False)
-		template.send_mail(obj.id)
-		return obj
-
-
 
 
 

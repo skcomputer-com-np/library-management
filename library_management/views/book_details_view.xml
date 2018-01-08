@@ -6,13 +6,13 @@
 	        <field name="model">product.template</field>
 	        <field name="arch" type="xml">
 	            <search string="Book Search">
-	                <filter string="All" name="" domain="[('role_librarian', '=','True')]"/>
+	                <filter string="All Books" name="book" domain="[('role_librarian', '=','True')]"/>
 	                <filter string="Available" name="" domain="[('state', '=','avail')]"/>
 	                <filter string="Not Available" name="" domain="[('state', '=','not_avail')]"/>
 	                <separator/>
 	                <group expand="1" string="Group By">
 	                    <filter string="Atuhor" name="author" context="{'group_by':'author'}"/>
-	                    <filter string="Publisher" name="publisher" context="{'group_by':'publisher'}"/>	                    
+	                    <filter string="Publisher" name="publisher" context="{'group_by':'publisher'}"/>                   
 	                </group>
 	            </search>
 	        </field>
@@ -75,8 +75,10 @@
 					<field name="publisher" attrs="{'invisible':[('role_librarian', '=' ,False)]}"/>
 					<field name="description" attrs="{'invisible':[('role_librarian', '=' ,False)]}"/>
 
-					<field name="book_avail" attrs="{
-						'invisible':[('role_librarian', '=' ,False)]}"/>
+					<field name="book_avail" force_save="1" attrs="{
+						'invisible':[('role_librarian', '=' ,False)],
+						'readonly':[('role_librarian', '=' ,True)]
+						}"/>
 				</xpath>								
 
 				<xpath expr="//page[@name='variants']/field[@name='attribute_line_ids']/tree/field[@name='value_ids']" position="replace">
@@ -86,7 +88,18 @@
 			</field>
 		</record>
 
-		<menuitem id="menu_book" name="Library" sequence="1"/>
+
+
+		<record id="action_default_filter" model="ir.actions.act_window">
+			<field name="name">Default Search</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">product.template</field>
+			<field name="view_type">form</field>
+			<field name="context">{"search_default_book":1}</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- <menuitem id="menu_book" name="Library" sequence="1"/> -->
 		<!-- <menuitem id="menu_book_menu" name="Book" sequence="2" parent="menu_book"/>
 		<menuitem id="menu_book_view" name="Book Details" sequence="3" action="action_book" parent="menu_book_menu"/> -->
 	</data>

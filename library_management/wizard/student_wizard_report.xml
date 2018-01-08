@@ -27,6 +27,6 @@
         <field name="target">new</field>
     </record>
 
-    <menuitem id="menu_student_details_report" name="Print Student" sequence="99" action="action_student_details_report" parent="menu_book" groups="library_management.library_group_librarian"/>
+    <menuitem id="menu_student_details_report" name="Print Student" sequence="99" action="action_student_details_report" groups="library_management.library_group_librarian"/>
 
 </odoo>
