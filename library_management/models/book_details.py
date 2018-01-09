@@ -15,6 +15,7 @@ class ProductTemplate(models.Model):
     author          = fields.Many2one('res.partner',domain=[('is_status', "=", "author")])
     publisher       = fields.Many2one('res.partner',domain=[('is_status', "=", "publisher")])
     copies          = fields.Integer(string="Copies",default=0)
+    temp_copies     = fields.Integer(default=0)
     book_avail      = fields.Integer(string="Available",default=0)
     date            = fields.Date(string="Date",default=datetime.datetime.now())
     state           = fields.Selection([
@@ -39,28 +40,62 @@ class ProductTemplate(models.Model):
 
     def on_book_avail(self,current_avail):
         print("on book avail called")
-        if current_avail == 0:
-            self.write({'state':'not_avail'})
-        else:
-            self.write({'state':'avail'})
+        if self.state != "draft":
+            if current_avail == 0:
+                self.write({'state':'not_avail'})
+            else:
+                self.write({'state':'avail'})
 
     @api.one
     def state_book_avail(self):
         if self.copies:
             self.write({'state':'avail'})
             self.write({'book_avail':self.copies})
+            obj = self.env['product.template'].search([('isbn','=',self.isbn)])
+            obj.write({'temp_copies':self.copies})
         else:
             raise UserError(_("Fill book copies field...!"))
 
+    @api.onchange('copies')
+    def addValueToTempCopies(self):
+        if self.state == "avail":            
+            obj = self.env['product.template'].search([('isbn','=',self.isbn)])
+            if obj.state == "avail":
+                old_available = obj.book_avail
+                old_copies = obj.temp_copies
+                new_copies = self.copies
+                temp_book_avail = new_copies - (old_copies - old_available)       
+                obj.write({'book_avail':temp_book_avail})               
+                obj.write({'temp_copies':new_copies})
+                if temp_book_avail != 0:
+                    obj.write({'state':'avail'})
+                else:
+                    obj.write({'state':'not_avail'})
+                    obj.write({'book_avail':0})               
 
-    # @api.model
-    # def create(self,vals):
-    #     result = super(ProductTemplate,self).create(vals)        
-    #     for i in vals :
-    #         print("key {}  values {}".format(i,vals[i]))
-    #     print(vals['attribute_line_ids'][0][2]['qty'])
-    #     print(vals['attribute_line_ids'][0][2]['attribute_id'])
-    #     return result
+        if self.state == 'not_avail':
+            obj = self.env['product.template'].search([('isbn','=',self.isbn)])
+            old_copies = obj.temp_copies
+            new_copies = self.copies
+            temp_book_avail = new_copies - old_copies       
+            obj.write({'book_avail':temp_book_avail})
+            obj.write({'temp_copies':new_copies})
+            obj.write({'state':'avail'})
+    
+    @api.model
+    def create(self,vals):
+        result = super(ProductTemplate,self).create(vals)    
+        print(vals)    
+        # for i in vals :
+        #     print("key {}  values {}".format(i,vals[i]))
+
+        for attribute in result.attribute_line_ids:
+            print("----------",attribute)
+
+
+        # print(vals['attribute_line_ids'][0][2]['qty'])
+        # print(vals['attribute_line_ids'][0][2]['attribute_id'])
+        return result
     
 class Materials(models.Model):
     _name ="material"

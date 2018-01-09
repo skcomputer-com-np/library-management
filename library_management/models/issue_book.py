@@ -16,18 +16,14 @@ class IssueBook(models.Model):
 	due_date = fields.Date(string='Due Date')
 	state = fields.Selection([			
 			('draft','Draft'),
-			('book_issue','Issue'),
+			('book_issue','Issued'),
 			('fine_cal','Fine Calculated'),
-			('book_return','Return'),
+			('book_return','Returned'),
 		],default='draft')
 
 	# for return
 	return_date 	= fields.Date(string='Return Date',default=datetime.datetime.now())
-	fine_resion 	= fields.Selection([			
-			('regular','Regular'),
-			('damage','Damaged'),
-			('lost','Lost')])
-
+	fine_resion	= fields.Many2one('make.fine.resion')
 	fine 			= fields.Float(string='Total Fine')
 
 
@@ -60,7 +56,6 @@ class IssueBook(models.Model):
 				raise UserError(_("Book is not availble...!"))
 		else:
 			raise UserError(_("No book found having...!"))
-		# print("===================>",obj.attribute_line_ids.values)
 
 	@api.one
 	def state_book_return(self):			
@@ -85,17 +80,20 @@ class IssueBook(models.Model):
 				return_date = return_date1.split('-')
 				due_date    = due_date1.split('-')
 				diff = date(int(due_date[0]),int(due_date[1]),int(due_date[2]))-date(int(return_date[0]),int(return_date[1]),int(return_date[2]))		
-				if diff.days < 0:				
-					if self.fine_resion == "regular":
-						self.fine = abs(diff.days)*1
+				if diff.days < 0:	
+					if self.fine_resion.per == True:
+						self.fine = (obj.standard_price * float(self.fine_resion.value)/100)
+					else:
+						self.fine = abs(diff.days)* self.fine_resion.value
 				else:
-					self.fine = 00.0;		
-
-				if self.fine_resion == "damage":			    
-						self.fine =(obj.standard_price*10)/100
-				elif self.fine_resion == "lost":			    
-						self.fine = (obj.standard_price*70)/100
-
+					self.fine = 00.0;
 			else:
 				raise UserError("There is no any book having isbn ",self.isbn)
 
+
+class MakeFineResion(models.Model):
+	_name = "make.fine.resion"
+
+	name 	= fields.Char(name="Resion")
+	value 	= fields.Char(name="Value")
+	per 	= fields.Boolean(string="Per(%)",default=False)

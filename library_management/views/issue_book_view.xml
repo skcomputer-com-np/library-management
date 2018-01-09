@@ -32,7 +32,7 @@
 								<field name="name" required='1'/>
 								<field name="isbn" required='1'/>
 								<field name="issue_date" required='1'/>
-								<field name="due_date" required='1'/>
+								<field name="due_date" required='1'/>								
 							</group>
 						</group>
 						<notebook>
@@ -64,7 +64,6 @@
 					<field name="issue_date"/>
 					<field name="due_date"/>
 					<field name="state"/>
-					<!-- <field name="status"/> -->
 				</tree>
 			</field>
 		</record>
@@ -80,6 +79,19 @@
 		</record>
 
 
-		<menuitem id="menu_issue_book_view" name="Issue Books" sequence="4" action="action_issue_book"/>
+		<!-- add Library child menu to Sales Main Manu -->
+        <menuitem id="menu_library" name="Library"
+            parent="sale.sale_menu_root"
+            sequence="7"/>
+
+        <menuitem id="menu_issue_book_view"
+            name="Issue Books"
+            sequence="1"
+            parent="menu_library"
+            action="library_management.action_issue_book"/>
+<!-- 
+		<menuitem id="menu_library" name="Library" sequence="10"/>
+		<menuitem id="menu_library_child" name="Library child" parent="menu_library" sequence="1"/>
+		 -->
 	</data>
 </odoo>
