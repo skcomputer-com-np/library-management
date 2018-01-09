@@ -94,6 +94,6 @@ class IssueBook(models.Model):
 class MakeFineResion(models.Model):
 	_name = "make.fine.resion"
 
-	name 	= fields.Char(name="Resion")
-	value 	= fields.Char(name="Value")
+	name 	= fields.Char(name="Resion",default="Regular")
+	value 	= fields.Integer(name="Value",default=1)
 	per 	= fields.Boolean(string="Per(%)",default=False)

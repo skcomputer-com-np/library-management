@@ -82,20 +82,6 @@ class ProductTemplate(models.Model):
             obj.write({'temp_copies':new_copies})
             obj.write({'state':'avail'})
     
-    @api.model
-    def create(self,vals):
-        result = super(ProductTemplate,self).create(vals)    
-        print(vals)    
-        # for i in vals :
-        #     print("key {}  values {}".format(i,vals[i]))
-
-        for attribute in result.attribute_line_ids:
-            print("----------",attribute)
-
-
-        # print(vals['attribute_line_ids'][0][2]['qty'])
-        # print(vals['attribute_line_ids'][0][2]['attribute_id'])
-        return result
     
 class Materials(models.Model):
     _name ="material"
@@ -114,3 +100,17 @@ class ProductAttributeLine(models.Model):
     
 
     # ./odoo-bin -d asd --db-filter=asd --addons-path=addons,../library-management -u library_management
+    # @api.model
+    # def create(self,vals):
+    #     result = super(ProductTemplate,self).create(vals)    
+    #     print(vals)    
+    #     for i in vals :
+    #         print("key {}  values {}".format(i,vals[i]))
+
+    #     for attribute in result.attribute_line_ids:
+    #         print("----------",attribute)
+
+
+    #     print(vals['attribute_line_ids'][0][2]['qty'])
+    #     print(vals['attribute_line_ids'][0][2]['attribute_id'])
+    #     return result
