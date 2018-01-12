@@ -8,8 +8,8 @@ class ProductTemplate(models.Model):
     _sql_constraints = [('Isbn unique','unique(isbn)','Enter unique isbn number...!')]
     role_librarian =fields.Boolean(string="Librarian")
     
-    book_type       = fields.Many2many('material', string='Book Type')
-    isbn            = fields.Char(string='ISBN')
+    book_type = fields.Many2many('material', string='Book Type')
+    isbn = fields.Char(string='ISBN')
     Description     = fields.Text(string='Description')
     language        = fields.Many2many('book.language',string='Book Language')
     author          = fields.Many2one('res.partner',domain=[('is_status', "=", "author")])
@@ -33,18 +33,18 @@ class ProductTemplate(models.Model):
     #     if self.standard_price == 0:
     #         raise UserError(_("Enter valid price..!"))
 
-    @api.constrains('copies')
-    def checkBookCopies(self):
-        if self.copies <= 0:
-            raise UserError(_("Enter valid available book copies..!"))
+    # @api.constrains('copies')
+    # def checkBookCopies(self):
+    #     if self.copies <= 0:
+    #         raise UserError(_("Enter valid available book copies..!"))
 
     def on_book_avail(self,current_avail):
         print("on book avail called")
         if self.state != "draft":
             if current_avail == 0:
-                self.write({'state':'not_avail'})
+                self.write({'state': 'not_avail'})
             else:
-                self.write({'state':'avail'})
+                self.write({'state': 'avail'})
 
     @api.one
     def state_book_avail(self):
@@ -68,21 +68,44 @@ class ProductTemplate(models.Model):
                 obj.write({'book_avail':temp_book_avail})               
                 obj.write({'temp_copies':new_copies})
                 if temp_book_avail != 0:
-                    obj.write({'state':'avail'})
+                    obj.write({'state': 'avail'})
                 else:
-                    obj.write({'state':'not_avail'})
-                    obj.write({'book_avail':0})               
+                    obj.write({'state': 'not_avail'})
+                    obj.write({'book_avail': 0})
 
         if self.state == 'not_avail':
-            obj = self.env['product.template'].search([('isbn','=',self.isbn)])
+            obj = self.env['product.template'].search([('isbn', '=', self.isbn)])
             old_copies = obj.temp_copies
             new_copies = self.copies
             temp_book_avail = new_copies - old_copies       
-            obj.write({'book_avail':temp_book_avail})
-            obj.write({'temp_copies':new_copies})
-            obj.write({'state':'avail'})
+            obj.write({'book_avail': temp_book_avail})
+            obj.write({'temp_copies': new_copies})
+            obj.write({'state': 'avail'})
     
-    
+    # def test(self):
+
+    #     obj = self.env['product.template'].search([])
+    #     print("Prod.Temp",obj)
+    #     for produt in self:
+    #         print("produt.id:::",produt.id)
+    #         print("produt.name:::",produt.name)
+
+    #     self.ensure_one()
+    #     print("self.attribute_line_ids.attribute_id.name",self.attribute_line_ids.attribute_id.name)
+    #     print("self.attribute_line_ids.qty",self.attribute_line_ids.qty)
+    #     print("=======SELF============================",self)
+
+
+    #     print("=======SELF.attribute_line_ids========",self.attribute_line_ids)
+    #     for attribute in self.attribute_line_ids:
+    #         print("attribute---------------------------",attribute)
+    #         print("attribute.attribute_id.name----------",attribute.attribute_id.name)
+    #         print("attribute.qty------------------------",attribute.qty)
+
+
+
+
+
 class Materials(models.Model):
     _name ="material"
     name = fields.Char("Book Type")
@@ -98,6 +121,7 @@ class ProductAttributeLine(models.Model):
 
     qty = fields.Integer(string='Quantity')             
     
+
 
     # ./odoo-bin -d asd --db-filter=asd --addons-path=addons,../library-management -u library_management
     # @api.model

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
-        <!-- publisher Details -->
-        <record id="demo_publisher_details_id1" model="publisher.details">
-            <field name="name">RS Agrawal</field>
-        </record>
-    </data>
-</odoo>

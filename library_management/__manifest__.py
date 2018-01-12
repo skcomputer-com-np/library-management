@@ -16,7 +16,6 @@ This is description for library management system.
         'views/book_details_view.xml',
         'views/issue_book_view.xml',
         'views/student_details.xml',
-        # 'views/return_book_view.xml',
         'wizard/make_price.xml',
         'wizard/make_student_divison.xml',
         'wizard/student_wizard_report.xml',

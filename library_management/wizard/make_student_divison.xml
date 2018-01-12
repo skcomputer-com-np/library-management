@@ -6,7 +6,19 @@
             <field name="model">make.student.division</field>
             <field name="arch" type="xml">
                 <form string="Student" version="7.0">
-                    <h2>Are you sure want to change?</h2>
+                    <field name="is_division" widget="checkbox"/>
+                        <label for="is_division" string="Division"/>
+                    <field name="is_course" widget="checkbox"/>
+                        <label for="is_course" string="Course"/>
+                    <group>
+                        <field name="course_ids" attrs="{
+                                'invisible':['|',('is_division','=',True),('is_division','=',False),
+                                ('is_course','=',False)]}"/>
+                                
+                        <field name="division_ids" attrs="{
+                                'invisible':['|',('is_course','=',True),('is_course','=',False),
+                                ('is_division','=',False)]}"/>
+                    </group>
                     <footer>
                         <span groups="base.group_user">
                             <button string="Yes" type="object"
@@ -18,9 +30,14 @@
                 </form>
             </field>
         </record>
-        <act_window id="action_set_student_divison_view" multi="True"
-                    name="Change Division" res_model="make.student.division" src_model="res.partner"
-                    view_mode="form" target="new" view_type="form"/>
+        <act_window id="action_set_student_divison_view" 
+            multi="True"
+            name="Change Division/Course" 
+            res_model="make.student.division" 
+            src_model="res.partner"
+            view_mode="form" 
+            target="new" 
+            view_type="form"/>
     </data>
 </odoo>
 

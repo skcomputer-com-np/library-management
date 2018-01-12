@@ -10,16 +10,18 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Gender</th>
+                            <th>Class</th>
                             <th>Division</th>
+                            <th>Gender</th>
                             <th>Date</th>
                         </tr>
 
                         <t t-foreach="docs" t-as="doc">
                             <tr>
                                <td><t t-raw="doc.name"/></td>
+                               <td><t t-raw="doc.course_ids.course"/></td>
+                               <td><t t-raw="doc.division_ids.name"/></td>
                                <td><t t-raw="doc.gender"/></td>
-                               <td><t t-raw="doc.division"/></td>
                                <td><t t-raw="doc.date"/></td>
                             </tr>
                         </t>

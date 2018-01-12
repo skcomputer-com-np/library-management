@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
-        <!-- Author Details -->
-        <record id="demo_author_details_id1" model="author.details">
-            <field name="name">JK</field>
-        </record>
-    </data>
-</odoo>

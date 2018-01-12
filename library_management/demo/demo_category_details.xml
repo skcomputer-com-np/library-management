@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data>
-        <!-- Category Details -->
-        <record id="demo_category_details_id1" model="category.details">
-            <field name="name">Book</field>
-        </record>
-    </data>
-</odoo>

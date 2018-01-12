@@ -28,10 +28,10 @@
     </record>
 
 
-    <menuitem id="menu_student_details_report"
+    <!-- <menuitem id="menu_student_details_report"
         name="Print Student"
         sequence="2"
         parent="menu_library"
         action="action_student_details_report" 
-        groups="library_management.library_group_librarian"/>
+        groups="library_management.library_group_librarian"/> -->
 </odoo>

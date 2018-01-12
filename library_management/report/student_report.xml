@@ -11,23 +11,27 @@
                         <td class="text-center"><b> Student Details</b></td>
                     </tr>
                 </table>
-                <table width="100%">
-                    <tr>
-                        <td class="text-center">Name</td>
-                        <td class="text-center">Division</td>
-                        <td class="text-center">Gender</td>
-                        <td class="text-center">Date</td>
-                    </tr>
-                    <t t-foreach="docs" t-as="doc1">
+                <table class="table table-bordered mb32" style="table-layout:auto" width='100%'>
+                    <thead>
                         <tr>
-                            <td class="text-center"><t t-esc="doc1.name"/></td>
-                            <td class="text-center"><t t-esc="doc1.divisoin"/></td>
-                            <td class="text-center"><t t-esc="doc1.gender"/></td>
-                            <td class="text-center"><t t-esc="doc1.date"/></td>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>Division</th>
+                            <th>Gender</th>
+                            <th>Date</th>
                         </tr>
-                    </t>
-                </table>
 
+                        <t t-foreach="docs" t-as="doc">
+                            <tr>
+                               <td><t t-raw="doc.name"/></td>
+                               <td><t t-raw="doc.course_ids.course"/></td>
+                               <td><t t-raw="doc.division_ids.name"/></td>
+                               <td><t t-raw="doc.gender"/></td>
+                               <td><t t-raw="doc.date"/></td>
+                            </tr>
+                        </t>
+                    </thead>
+               </table>
             </div>
         </div>
     </t>

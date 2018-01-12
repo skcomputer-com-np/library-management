@@ -15,10 +15,6 @@
                 <li>
                     Name: <span>${object.name}</span>
                 </li>
-                <li>
-                    Role: <span>${object.is_status}</span>
-                </li>
-
                 <p>Now you are member of library management system</p>
                 <p>you can make transection related books only.</p>
        		</ul>

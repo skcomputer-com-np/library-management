@@ -21,20 +21,23 @@
 <!--Student start -->
 					<xpath expr="//page[@name='sales_purchases']" position="after">
 						<page string="Student" name='student' attrs="{
-							'invisible':['|',('is_status','=','librarian'),'|',('is_status','=','author'),'|',('is_status','=','publisher')]
+							'invisible':['|',('is_status','=','librarian'),'|',('is_status','=','author'),'|',('is_status','=','publisher'),'|',('is_status','!=','stud')]
 							}">
 							<group>
+								<field name="course_ids" attrs="{
+										'required':[('is_status','=','stud')]}"/>
+
 								<field name="rno" attrs="{
 										'required':[('is_status','=','stud')]
 									}"/>
 
-								<field name="division" attrs="{
+								<field name="division_ids" attrs="{
 										'required':[('is_status','=','stud')]
 									}"/>
 								<field name="gender" attrs="{
 										'required':[('is_status','=','stud')]
 									}"/>
-								<field name="date" attrs="{
+								<field name="date" readonly="1" attrs="{
 										'required':[('is_status','=','stud')]
 									}"/>
 							</group>

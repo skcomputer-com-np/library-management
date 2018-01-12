@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
+		<record id="view_issue_book_search" model="ir.ui.view">
+	        <field name="name">issue.return.book.search</field>
+	        <field name="model">issue.book</field>
+	        <field name="arch" type="xml">
+	            <search string="Book Search">
+	                <filter string="Issued" name="issuebook " domain="[('state', '=','book_issue')]"/>
+	                <separator/>
+	                <filter string="Returned" name="" domain="[('state', '=','book_return')]"/>
+	            </search>
+	        </field>
+	    </record>
+
 		<record id="view_issue_book" model="ir.ui.view">
 			<field name="name">view.book.details</field>
 			<field name="model">issue.book</field>
@@ -28,11 +40,16 @@
 					<sheet>
 						<group>
 							<group>
-								<field name="stud_id" required='1'/>
-								<field name="name" required='1'/>
-								<field name="isbn" required='1'/>
-								<field name="issue_date" required='1'/>
-								<field name="due_date" required='1'/>								
+								<field name="stud_id" required='1'
+								 attrs="{'readonly': [('state','!=','draft')]}"/>
+								<field name="name" required='1'
+									attrs="{'readonly': [('state','in',['book_return','book_issue','fine_cal'])]}"/>
+								<field name="isbn" required='1'
+									attrs="{'readonly': [('state','!=','draft')]}"/>
+								<field name="issue_date" required='1'
+									attrs="{'readonly': [('state','!=','draft')]}"/>
+								<field name="due_date" required='1'
+									attrs="{'readonly': [('state','!=','draft')]}"/>								
 							</group>
 						</group>
 						<notebook>
@@ -44,6 +61,9 @@
 									<field name="fine_resion"
 											attrs="{
 											'readonly': [('state','=','book_return')]}"/>
+											<p class="oe_grey">
+						                        <strong>Note</strong>:Fine will calculated on book cost if Per(%) is checked.
+						                    </p>
 									<field name="fine" readonly="1"/>
 								</group>
 							</page>
@@ -60,15 +80,11 @@
 				<tree string="Issue Book">
 					<field name="stud_id"/>
 					<field name="name"/>
-					<field name="isbn"/>
-					<field name="issue_date"/>
 					<field name="due_date"/>
 					<field name="state"/>
 				</tree>
 			</field>
 		</record>
-
-
 
 		<record id="action_issue_book" model="ir.actions.act_window">
 			<field name="name">Library</field>
@@ -80,15 +96,36 @@
 
 
 		<!-- add Library child menu to Sales Main Manu -->
-        <menuitem id="menu_library" name="Library"
+        <menuitem id="menu_library" name="Library Management System"
             parent="sale.sale_menu_root"
-            sequence="7"/>
+            sequence="8"/>
 
+            	<!-- CHILD MENU TRANSECTION -->
+	        <menuitem id="transection_child_menu_of_library" name="Transections"
+	            parent="menu_library"
+	            sequence="1"/>
+
+	            <!-- CHILD MENU  -->
+	        <menuitem id="report_child_menu_of_library" name="Report"
+	            parent="menu_library"
+	            sequence="2"/>
+
+
+	    	<!-- ISSUED AND RETURN  -->
         <menuitem id="menu_issue_book_view"
-            name="Issue Books"
-            sequence="1"
-            parent="menu_library"
+            name="Issue And Return"
+            sequence="2"
+            parent="transection_child_menu_of_library"
             action="library_management.action_issue_book"/>
+
+
+            <!-- PRINT LIST OF REGISTERED STUDETNE -->
+        <menuitem id="menu_student_details_report"
+	        name="Registerd Students"
+	        sequence="1"
+	        parent="report_child_menu_of_library"
+	        action="action_student_details_report" 
+	        groups="library_management.library_group_librarian"/>
 <!-- 
 		<menuitem id="menu_library" name="Library" sequence="10"/>
 		<menuitem id="menu_library_child" name="Library child" parent="menu_library" sequence="1"/>
