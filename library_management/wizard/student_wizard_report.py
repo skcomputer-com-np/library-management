@@ -16,12 +16,4 @@ class StudentDetailsSummary(models.TransientModel):
         self.ensure_one()
         [data] = self.read()
         students = self.env['res.partner'].search([('date','>=',data['date_from'])])
-        # print("======================>",students)
-        # print('\n\n\n')
-        # students = self.env['res.partner'].browse()
-        # datas = {
-        #     'ids': [],
-        #     'model': 'res.partner',
-        #     'form': data
-        # }
         return self.env.ref('library_management.wizard_action_report_student_detail').report_action(students)

@@ -26,12 +26,4 @@
         <field name="view_id" ref="view_student_details_data"/>
         <field name="target">new</field>
     </record>
-
-
-    <!-- <menuitem id="menu_student_details_report"
-        name="Print Student"
-        sequence="2"
-        parent="menu_library"
-        action="action_student_details_report" 
-        groups="library_management.library_group_librarian"/> -->
 </odoo>

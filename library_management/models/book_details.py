@@ -4,21 +4,21 @@ from odoo import api, fields, models,_
 from odoo.exceptions import UserError,ValidationError
 
 class ProductTemplate(models.Model):
-    _inherit = 'product.template'
-    _sql_constraints = [('Isbn unique','unique(isbn)','Enter unique isbn number...!')]
-    role_librarian =fields.Boolean(string="Librarian")
+    _inherit= 'product.template'
+    _sql_constraints= [('Isbn unique','unique(isbn)','Enter unique isbn number...!')]
+    role_librarian=fields.Boolean(string="Librarian")
     
-    book_type = fields.Many2many('material', string='Book Type')
-    isbn = fields.Char(string='ISBN')
-    Description     = fields.Text(string='Description')
-    language        = fields.Many2many('book.language',string='Book Language')
-    author          = fields.Many2one('res.partner',domain=[('is_status', "=", "author")])
-    publisher       = fields.Many2one('res.partner',domain=[('is_status', "=", "publisher")])
-    copies          = fields.Integer(string="Copies",default=0)
-    temp_copies     = fields.Integer(default=0)
-    book_avail      = fields.Integer(string="Available",default=0)
-    date            = fields.Date(string="Date",default=datetime.datetime.now())
-    state           = fields.Selection([
+    book_type= fields.Many2many('material', string='Book Type')
+    isbn= fields.Char(string='ISBN')
+    Description= fields.Text(string='Description')
+    language= fields.Many2many('book.language',string='Book Language')
+    author= fields.Many2one('res.partner',domain=[('is_status', "=", "author")])
+    publisher= fields.Many2one('res.partner',domain=[('is_status', "=", "publisher")])
+    copies= fields.Integer(string="Copies",default=0)
+    temp_copies= fields.Integer(default=0)
+    book_avail= fields.Integer(string="Available",default=0)
+    date= fields.Date(string="Date",default=datetime.datetime.now())
+    state= fields.Selection([
                         ('draft'  , 'Draft' ),
                         ('avail', 'Available' ),
                         ('not_avail', 'Not Available' ),
@@ -27,16 +27,6 @@ class ProductTemplate(models.Model):
     @api.constrains('isbn')
     def unique_isbn(self):
         pass
-
-    # @api.constrains('standard_price')
-    # def checkBookCost(self):
-    #     if self.standard_price == 0:
-    #         raise UserError(_("Enter valid price..!"))
-
-    # @api.constrains('copies')
-    # def checkBookCopies(self):
-    #     if self.copies <= 0:
-    #         raise UserError(_("Enter valid available book copies..!"))
 
     def on_book_avail(self,current_avail):
         print("on book avail called")
@@ -82,30 +72,6 @@ class ProductTemplate(models.Model):
             obj.write({'temp_copies': new_copies})
             obj.write({'state': 'avail'})
     
-    # def test(self):
-
-    #     obj = self.env['product.template'].search([])
-    #     print("Prod.Temp",obj)
-    #     for produt in self:
-    #         print("produt.id:::",produt.id)
-    #         print("produt.name:::",produt.name)
-
-    #     self.ensure_one()
-    #     print("self.attribute_line_ids.attribute_id.name",self.attribute_line_ids.attribute_id.name)
-    #     print("self.attribute_line_ids.qty",self.attribute_line_ids.qty)
-    #     print("=======SELF============================",self)
-
-
-    #     print("=======SELF.attribute_line_ids========",self.attribute_line_ids)
-    #     for attribute in self.attribute_line_ids:
-    #         print("attribute---------------------------",attribute)
-    #         print("attribute.attribute_id.name----------",attribute.attribute_id.name)
-    #         print("attribute.qty------------------------",attribute.qty)
-
-
-
-
-
 class Materials(models.Model):
     _name ="material"
     name = fields.Char("Book Type")
@@ -114,27 +80,7 @@ class BookLanguage(models.Model):
     _name = "book.language"
     name  = fields.Char()
 
-
-
 class ProductAttributeLine(models.Model):
     _inherit = "product.attribute.line"
 
-    qty = fields.Integer(string='Quantity')             
-    
-
-
-    # ./odoo-bin -d asd --db-filter=asd --addons-path=addons,../library-management -u library_management
-    # @api.model
-    # def create(self,vals):
-    #     result = super(ProductTemplate,self).create(vals)    
-    #     print(vals)    
-    #     for i in vals :
-    #         print("key {}  values {}".format(i,vals[i]))
-
-    #     for attribute in result.attribute_line_ids:
-    #         print("----------",attribute)
-
-
-    #     print(vals['attribute_line_ids'][0][2]['qty'])
-    #     print(vals['attribute_line_ids'][0][2]['attribute_id'])
-    #     return result
+    qty = fields.Integer(string='Quantity')

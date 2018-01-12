@@ -13,12 +13,12 @@
 						</div>
 					</xpath>
 
-<!-- mobile replace -->
+					<!-- mobile replace -->
 					<xpath expr="//field[@name='mobile']" position="replace">
 						<field name="mobile" widget='mobile' required='1'/>
 					</xpath>
 
-<!--Student start -->
+					<!--Student start -->
 					<xpath expr="//page[@name='sales_purchases']" position="after">
 						<page string="Student" name='student' attrs="{
 							'invisible':['|',('is_status','=','librarian'),'|',('is_status','=','author'),'|',('is_status','=','publisher'),'|',('is_status','!=','stud')]
@@ -43,7 +43,7 @@
 							</group>
 						</page>
 					</xpath>	
-<!--Student stop-->
+					<!--Student stop-->
 				</field>
 		</record>
 	</data>

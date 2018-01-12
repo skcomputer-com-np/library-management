@@ -26,5 +26,3 @@
                     view_mode="form" target="new" view_type="form"/>
     </data>
 </odoo>
-
-<!-- context="{'my_filed': 'simple msg'} -->

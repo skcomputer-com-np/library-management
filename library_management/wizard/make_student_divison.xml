@@ -14,7 +14,7 @@
                         <field name="course_ids" attrs="{
                                 'invisible':['|',('is_division','=',True),('is_division','=',False),
                                 ('is_course','=',False)]}"/>
-                                
+
                         <field name="division_ids" attrs="{
                                 'invisible':['|',('is_course','=',True),('is_course','=',False),
                                 ('is_division','=',False)]}"/>
@@ -40,5 +40,3 @@
             view_type="form"/>
     </data>
 </odoo>
-
-<!-- context="{'my_filed': 'simple msg'} -->

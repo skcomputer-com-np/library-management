@@ -9,8 +9,6 @@
             file="library_management.report_studentdetail"
             name="library_management.report_studentdetail"
         />
-
-
         <report
             id="wizard_action_report_student_detail"
             string="Student Details with wizard"

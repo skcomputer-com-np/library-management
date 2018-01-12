@@ -111,7 +111,7 @@
 	            sequence="2"/>
 
 
-	    	<!-- ISSUED AND RETURN  -->
+	    <!-- ISSUED AND RETURN  -->
         <menuitem id="menu_issue_book_view"
             name="Issue And Return"
             sequence="2"
@@ -119,16 +119,12 @@
             action="library_management.action_issue_book"/>
 
 
-            <!-- PRINT LIST OF REGISTERED STUDETNE -->
+        <!-- PRINT LIST OF REGISTERED STUDETNE -->
         <menuitem id="menu_student_details_report"
 	        name="Registerd Students"
 	        sequence="1"
 	        parent="report_child_menu_of_library"
 	        action="action_student_details_report" 
 	        groups="library_management.library_group_librarian"/>
-<!-- 
-		<menuitem id="menu_library" name="Library" sequence="10"/>
-		<menuitem id="menu_library_child" name="Library child" parent="menu_library" sequence="1"/>
-		 -->
 	</data>
 </odoo>
