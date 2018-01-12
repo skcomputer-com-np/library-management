@@ -37,7 +37,7 @@ class IssueBook(models.Model):
 		due_date1=  self.due_date
 
 		issue_date= issue_date1.split('-')
-		due_date due_date1.split('-')
+		due_date= due_date1.split('-')
 
 		diff= date(int(due_date[0]),int(due_date[1]),int(due_date[2]))-date(int(issue_date[0]),int(issue_date[1]),int(issue_date[2]))
 
