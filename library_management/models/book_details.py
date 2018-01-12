@@ -4,21 +4,21 @@ from odoo import api, fields, models,_
 from odoo.exceptions import UserError,ValidationError
 
 class ProductTemplate(models.Model):
-    _inherit= 'product.template'
-    _sql_constraints= [('Isbn unique','unique(isbn)','Enter unique isbn number...!')]
-    role_librarian=fields.Boolean(string="Librarian")
+    _inherit = 'product.template'
+    _sql_constraints = [('Isbn unique','unique(isbn)','Enter unique isbn number...!')]
+    role_librarian =fields.Boolean(string="Librarian")
     
-    book_type= fields.Many2many('material', string='Book Type')
-    isbn= fields.Char(string='ISBN')
-    Description= fields.Text(string='Description')
-    language= fields.Many2many('book.language',string='Book Language')
-    author= fields.Many2one('res.partner',domain=[('is_status', "=", "author")])
-    publisher= fields.Many2one('res.partner',domain=[('is_status', "=", "publisher")])
-    copies= fields.Integer(string="Copies",default=0)
-    temp_copies= fields.Integer(default=0)
-    book_avail= fields.Integer(string="Available",default=0)
-    date= fields.Date(string="Date",default=datetime.datetime.now())
-    state= fields.Selection([
+    book_type = fields.Many2many('material', string='Book Type')
+    isbn = fields.Char(string='ISBN')
+    Description = fields.Text(string='Description')
+    language = fields.Many2many('book.language',string='Book Language')
+    author = fields.Many2one('res.partner',domain=[('is_status', "=", "author")])
+    publisher = fields.Many2one('res.partner',domain=[('is_status', "=", "publisher")])
+    copies = fields.Integer(string="Copies",default=0)
+    temp_copies = fields.Integer(default=0)
+    book_avail = fields.Integer(string="Available",default=0)
+    date = fields.Date(string="Date",default=datetime.datetime.now())
+    state = fields.Selection([
                         ('draft'  , 'Draft' ),
                         ('avail', 'Available' ),
                         ('not_avail', 'Not Available' ),

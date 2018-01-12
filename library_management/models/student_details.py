@@ -5,10 +5,10 @@ from odoo import api, fields, models,_
 from odoo.exceptions import UserError,ValidationError
 
 class StudentDetails(models.Model):
-	_inherit= 'res.partner'
+	_inherit = 'res.partner'
 
 
-	is_status= fields.Selection(
+	is_status = fields.Selection(
 		[
 			('stud','Student'),
 			('librarian','Librarian'),
@@ -16,17 +16,17 @@ class StudentDetails(models.Model):
 			('publisher','Publisher'),
 		])
 
-	gender= fields.Selection(
+	gender = fields.Selection(
 		[
 			('male','Male'),
 			('female','Female'),
 			('other','Other')
 		])
-	division_ids= fields.Many2one('student.division')
+	division_ids = fields.Many2one('student.division')
 
-	course_ids= fields.Many2one("student.course")
-	date= fields.Date("Date",default=datetime.datetime.now())
-	rno= fields.Char(string="Roll No")
+	course_ids = fields.Many2one("student.course")
+	date = fields.Date("Date",default=datetime.datetime.now())
+	rno = fields.Char(string="Roll No")
 
 	@api.onchange('is_status')
 	def onchange_standard(self):
@@ -46,15 +46,15 @@ class StudentDetails(models.Model):
 		return obj
 
 class StudentCourse(models.Model):
-	_name=	'student.course'
-	_description=	 "Name of courses"
-	_rec_name= "course"
+	_name =	'student.course'
+	_description =	 "Name of courses"
+	_rec_name = "course"
 
-	course= fields.Char(string="Course")
+	course = fields.Char(string="Course")
 
 class StudentDivision(models.Model):
-	_name= 'student.division'
-	_description= "Divisions of student"
-	_rec_name= "name"
+	_name = 'student.division'
+	_description = "Divisions of student"
+	_rec_name = "name"
 
-	name= fields.Char(string="Division")
+	name = fields.Char(string="Division")
